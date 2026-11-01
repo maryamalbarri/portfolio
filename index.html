@@ -1,426 +1,579 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maryam — Web Developer</title>
-<style>
-  :root{
-    --ink: #0E1116;
-    --surface: #161A22;
-    --surface-2: #1D2230;
-    --line: #2A3040;
-    --text: #E9E7DF;
-    --text-dim: #9BA1B0;
-    --signal: #5C7CFF;
-    --signal-dim: #3A4A99;
-    --amber: #E7A94C;
-    --radius: 4px;
-    --serif: "Fraunces", Georgia, serif;
-    --sans: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maryam — Web Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1E1831;
+      --surface: #29213D;
+      --surface-2: #352B4A;
+      --line: #473C5D;
+      --text: #F5F0EC;
+      --text-dim: #B8AFC9;
+      --signal: #F8F32B;
+      --amber: #E8555C;
+      --radius: 4px;
+      --serif: "Fraunces", Georgia, serif;
+      --sans: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
+    }
 
-  @font-face{
-    font-family: "Fraunces";
-    src: local("Fraunces");
-  }
+    * {
+      box-sizing: border-box;
+    }
 
-  *{ box-sizing: border-box; }
-  html{ scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior: auto; }
-    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
-  }
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
 
-  body{
-    margin: 0;
-    background: var(--ink);
-    color: var(--text);
-    font-family: var(--sans);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
+      * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
 
-  a{ color: inherit; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  ::selection{ background: var(--signal-dim); color: var(--text); }
+    a {
+      color: inherit;
+    }
 
-  :focus-visible{
-    outline: 2px solid var(--amber);
-    outline-offset: 3px;
-  }
+    ::selection {
+      background: var(--signal-dim);
+      color: var(--text);
+    }
 
-  .wrap{
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 0 28px;
-  }
+    :focus-visible {
+      outline: 2px solid var(--amber);
+      outline-offset: 3px;
+    }
 
-  /* ---------- Nav ---------- */
-  header{
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: rgba(14,17,22,0.85);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
-  }
-  nav.wrap{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 64px;
-  }
-  .brand{
-    font-family: var(--mono);
-    font-size: 15px;
-    font-weight: 500;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-  }
-  .brand span{ color: var(--signal); }
-  .nav-links{
-    display: flex;
-    gap: 28px;
-    list-style: none;
-    margin: 0; padding: 0;
-    font-size: 14px;
-  }
-  .nav-links a{
-    text-decoration: none;
-    color: var(--text-dim);
-    transition: color 0.15s ease;
-  }
-  .nav-links a:hover{ color: var(--text); }
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
 
-  /* ---------- Hero ---------- */
-  .hero{
-    padding: 90px 0 70px;
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 56px;
-    align-items: center;
-  }
-  .hero h1{
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(34px, 5vw, 52px);
-    line-height: 1.12;
-    margin: 0 0 18px;
-    letter-spacing: -0.01em;
-  }
-  .hero p.lede{
-    color: var(--text-dim);
-    font-size: 17px;
-    max-width: 46ch;
-    margin: 0 0 30px;
-  }
-  .cta-row{
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-  .btn{
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 11px 20px;
-    border-radius: var(--radius);
-    font-size: 14.5px;
-    font-weight: 500;
-    text-decoration: none;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease;
-    font-family: var(--sans);
-  }
-  .btn:active{ transform: translateY(1px); }
-  .btn-primary{
-    background: var(--signal);
-    color: #0E1116;
-  }
-  .btn-primary:hover{ background: #7690FF; }
-  .btn-ghost{
-    border-color: var(--line);
-    color: var(--text);
-  }
-  .btn-ghost:hover{ border-color: var(--text-dim); }
+    /* ---------- Nav ---------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(14, 17, 22, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
 
-  /* editor mock */
-  .editor{
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
-  }
-  .editor-bar{
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 14px;
-    background: var(--surface-2);
-    border-bottom: 1px solid var(--line);
-  }
-  .dot{ width: 10px; height: 10px; border-radius: 50%; }
-  .dot.r{ background: #E5605A; }
-  .dot.y{ background: #E7B84C; }
-  .dot.g{ background: #5FC77E; }
-  .editor-filename{
-    margin-left: 8px;
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--text-dim);
-  }
-  .editor-body{
-    padding: 20px 22px;
-    font-family: var(--mono);
-    font-size: 13.5px;
-    line-height: 1.75;
-    overflow-x: auto;
-  }
-  .tok-key{ color: #E9E7DF; }
-  .tok-str{ color: var(--amber); }
-  .tok-kw{ color: var(--signal); }
-  .tok-punc{ color: var(--text-dim); }
-  .cursor{
-    display: inline-block;
-    width: 7px;
-    height: 15px;
-    background: var(--amber);
-    vertical-align: middle;
-    margin-left: 2px;
-    animation: blink 1s step-end infinite;
-  }
-  @keyframes blink{ 50%{ opacity: 0; } }
+    nav.wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
 
-  /* ---------- Sections ---------- */
-  section{ padding: 70px 0; }
-  section.bordered{ border-top: 1px solid var(--line); }
+    .brand {
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
 
-  .section-head{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 40px;
-    gap: 20px;
-  }
-  .section-head h2{
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 28px;
-    margin: 0;
-  }
-  .section-head p{
-    color: var(--text-dim);
-    font-size: 14.5px;
-    margin: 0;
-    max-width: 32ch;
-    text-align: right;
-  }
+    .brand span {
+      color: var(--signal);
+    }
 
-  /* ---------- Projects ---------- */
-  .project{
-    display: grid;
-    grid-template-columns: 56px 1fr auto;
-    gap: 22px;
-    align-items: start;
-    padding: 28px 0;
-    border-top: 1px solid var(--line);
-    text-decoration: none;
-    color: inherit;
-  }
-  .project:first-of-type{ border-top: none; }
-  .project-index{
-    font-family: var(--mono);
-    color: var(--text-dim);
-    font-size: 13px;
-    padding-top: 4px;
-  }
-  .project-title{
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 500;
-    margin: 0 0 8px;
-    background-image: linear-gradient(var(--amber), var(--amber));
-    background-size: 0% 1px;
-    background-repeat: no-repeat;
-    background-position: left bottom;
-    transition: background-size 0.25s ease;
-    display: inline;
-  }
-  .project:hover .project-title{ background-size: 100% 1px; }
-  .project-desc{
-    color: var(--text-dim);
-    font-size: 15px;
-    max-width: 56ch;
-    margin: 0 0 12px;
-  }
-  .tags{
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    list-style: none;
-    padding: 0; margin: 0;
-  }
-  .tags li{
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--text-dim);
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    padding: 3px 8px;
-  }
-  .project-arrow{
-    font-size: 20px;
-    color: var(--text-dim);
-    padding-top: 6px;
-    transition: transform 0.2s ease, color 0.2s ease;
-  }
-  .project:hover .project-arrow{
-    transform: translate(3px, -3px);
-    color: var(--amber);
-  }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+    }
 
-  /* ---------- Contact ---------- */
-  .contact-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 56px;
-  }
-  .contact-intro h2{
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 28px;
-    margin: 0 0 14px;
-  }
-  .contact-intro p{
-    color: var(--text-dim);
-    font-size: 15px;
-    max-width: 40ch;
-    margin: 0 0 22px;
-  }
-  .direct-email{
-    font-family: var(--mono);
-    font-size: 15px;
-    color: var(--amber);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-  }
-  .direct-email:hover{ border-color: var(--amber); }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dim);
+      transition: color 0.15s ease;
+    }
 
-  form{ display: flex; flex-direction: column; gap: 14px; }
-  .field label{
-    display: block;
-    font-size: 12.5px;
-    color: var(--text-dim);
-    margin-bottom: 6px;
-    font-family: var(--mono);
-  }
-  .field input, .field textarea{
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    color: var(--text);
-    padding: 11px 13px;
-    font-family: var(--sans);
-    font-size: 14.5px;
-    resize: vertical;
-  }
-  .field input:focus, .field textarea:focus{
-    border-color: var(--signal);
-    outline: none;
-  }
-  .form-status{
-    font-size: 13px;
-    color: var(--text-dim);
-    min-height: 18px;
-  }
+    .nav-links a:hover {
+      color: var(--text);
+    }
 
-  footer{
-    border-top: 1px solid var(--line);
-    padding: 28px 0 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
-    color: var(--text-dim);
-  }
-  footer .socials{ display: flex; gap: 18px; }
-  footer a{ text-decoration: none; color: var(--text-dim); }
-  footer a:hover{ color: var(--text); }
+    /* ---------- Hero ---------- */
+    .hero {
+      padding-top: 90px;
+      padding-bottom: 70px;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
 
-  @media (max-width: 760px){
-    .hero{ grid-template-columns: 1fr; padding-top: 50px; }
-    .contact-grid{ grid-template-columns: 1fr; }
-    .section-head{ flex-direction: column; align-items: flex-start; gap: 8px; }
-    .section-head p{ text-align: left; }
-    .project{ grid-template-columns: 32px 1fr; }
-    .project-arrow{ display: none; }
-    .nav-links{ display: none; }
-    footer{ flex-direction: column; gap: 12px; text-align: center; }
-  }
-</style>
+    .hero h1 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.12;
+      margin: 0 0 18px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero p.lede {
+      color: var(--text-dim);
+      font-size: 17px;
+      max-width: 46ch;
+      margin: 0 0 30px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: var(--radius);
+      font-size: 14.5px;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition:
+        transform 0.2s ease,
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease;
+      font-family: var(--sans);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: var(--signal);
+      color: #0E1116;
+    }
+
+    .btn-primary:hover {
+      background: #5D5D81;
+      color: #F5F0EC;
+    }
+
+    .btn-ghost {
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--text-dim);
+    }
+
+    /* editor mock */
+    .editor {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
+    }
+
+    .editor-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot.r {
+      background: #E5605A;
+    }
+
+    .dot.y {
+      background: #E7B84C;
+    }
+
+    .dot.g {
+      background: #5FC77E;
+    }
+
+    .editor-filename {
+      margin-left: 8px;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--text-dim);
+    }
+
+    .editor-body {
+      padding: 20px 22px;
+      font-family: var(--mono);
+      font-size: 13.5px;
+      line-height: 1.75;
+      overflow-x: auto;
+    }
+
+    .tok-key {
+      color: #E9E7DF;
+    }
+
+    .tok-str {
+      color: var(--amber);
+    }
+
+    .tok-kw {
+      color: var(--signal);
+    }
+
+    .tok-punc {
+      color: var(--text-dim);
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 7px;
+      height: 15px;
+      background: var(--amber);
+      vertical-align: middle;
+      margin-left: 2px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* ---------- Sections ---------- */
+    section {
+      padding: 70px 0;
+    }
+
+    section.bordered {
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 40px;
+      gap: 20px;
+    }
+
+    .section-head h2 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 28px;
+      margin: 0;
+    }
+
+    .section-head p {
+      color: var(--text-dim);
+      font-size: 14.5px;
+      margin: 0;
+      max-width: 32ch;
+      text-align: right;
+    }
+
+    /* ---------- Projects ---------- */
+    .project {
+      display: grid;
+      grid-template-columns: 56px 1fr auto;
+      gap: 22px;
+      align-items: start;
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .project:first-of-type {
+      border-top: none;
+    }
+
+    .project-index {
+      font-family: var(--mono);
+      color: var(--text-dim);
+      font-size: 13px;
+      padding-top: 4px;
+    }
+
+    .project-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 500;
+      margin: 0 0 8px;
+      background-image: linear-gradient(var(--amber), var(--amber));
+      background-size: 0% 1px;
+      background-repeat: no-repeat;
+      background-position: left bottom;
+      transition: background-size 0.25s ease;
+      display: inline;
+    }
+
+    .project:hover .project-title {
+      background-size: 100% 1px;
+    }
+
+    .project-desc {
+      color: var(--text-dim);
+      font-size: 15px;
+      max-width: 56ch;
+      margin: 0 0 12px;
+    }
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tags li {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-dim);
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 3px 8px;
+    }
+
+    .project-arrow {
+      font-size: 20px;
+      color: var(--text-dim);
+      padding-top: 6px;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .project:hover .project-arrow {
+      transform: translate(3px, -3px);
+      color: var(--amber);
+    }
+
+    /* ---------- Contact ---------- */
+
+    .contact-intro h2 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 28px;
+      margin: 0 0 14px;
+    }
+
+    .contact-intro p {
+      color: var(--text-dim);
+      font-size: 15px;
+      max-width: none;
+      margin: 0 0 22px;
+    }
+
+    .contact-intro .contact-email{
+      color: var(--amber);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    footer .socials {
+      display: flex;
+      gap: 18px;
+    }
+
+    footer a {
+      text-decoration: none;
+      color: var(--text-dim);
+    }
+
+    footer a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 50px;
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .section-head p {
+        text-align: left;
+      }
+
+      .project {
+        grid-template-columns: 32px 1fr;
+      }
+
+      .project-arrow {
+        display: none;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav.wrap {
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+      }
+
+      .nav-links {
+        gap: 20px;
+        font-size: 13px;
+      }
+
+      .wrap {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .hero {
+        padding-top: 48px;
+        padding-bottom: 52px;
+        gap: 32px;
+      }
+
+      section {
+        padding: 52px 0;
+      }
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding-top: 50px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header>
-  <nav class="wrap">
-    <a href="#top" class="brand">maryamalbarri<span>.dev</span></a>
-    <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+  <header>
+    <nav class="wrap">
+      <a href="#top" class="brand">maryamalbarri<span>.dev</span></a>
+      <ul class="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<main id="top">
-  <div class="wrap hero">
-    <div>
-      <h1>I build things for the web, from schema to pixel.</h1>
-      <p class="lede">Web developer working across the stack — comfortable wiring up a database, shipping an API, and polishing the interface that sits on top of it.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#work">See the work</a>
-        <a class="btn btn-ghost" href="#contact">Get in touch</a>
-      </div>
-    </div>
-    <div class="editor" aria-hidden="true">
-      <div class="editor-bar">
-        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-        <span class="editor-filename">maryam.js</span>
-      </div>
-      <div class="editor-body">
-<span class="tok-kw">const</span> <span class="tok-key">developer</span> <span class="tok-punc">=</span> <span class="tok-punc">{</span><br>
-&nbsp;&nbsp;<span class="tok-key">name</span><span class="tok-punc">:</span> <span class="tok-str">"Maryam"</span><span class="tok-punc">,</span><br>
-&nbsp;&nbsp;<span class="tok-key">role</span><span class="tok-punc">:</span> <span class="tok-str">"Web Developer"</span><span class="tok-punc">,</span><br>
-&nbsp;&nbsp;<span class="tok-key">stack</span><span class="tok-punc">:</span> <span class="tok-punc">[</span><span class="tok-str">"JavaScript"</span><span class="tok-punc">,</span> <span class="tok-str">"React"</span><span class="tok-punc">,</span> <span class="tok-str">"Node"</span><span class="tok-punc">]</span><span class="tok-punc">,</span><br>
-&nbsp;&nbsp;<span class="tok-key">status</span><span class="tok-punc">:</span> <span class="tok-str">"open to work"</span><span class="cursor"></span><br>
-<span class="tok-punc">};</span>
-      </div>
-    </div>
-  </div>
-
-  <section id="work" class="bordered">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Selected work</h2>
-        <p>A few projects worth a closer look. Replace these with your own.</p>
-      </div>
-
-      <a class="project" href="#" target="_blank" rel="noopener">
-        <span class="project-index">01</span>
-        <div>
-          <h3 class="project-title">Café</h3>
-          <p class="project-desc">E-commerce coffee shop landing page.</p>
-          <ul class="tags"><li>Next.js</li><li>Node.js</li><li>GSAP</li></ul>
+  <main id="top">
+    <div class="wrap hero">
+      <div>
+        <h1>I build things for the web, from schema to pixel.</h1>
+        <p class="lede">Web developer working across the stack — comfortable wiring up a database, shipping an API, and
+          polishing the interface that sits on top of it.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#work">See the work</a>
+          <a class="btn btn-ghost" href="#contact">Get in touch</a>
         </div>
-        <span class="project-arrow">↗</span>
-      </a>
+      </div>
+      <div class="editor" aria-hidden="true">
+        <div class="editor-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="editor-filename">maryam.js</span>
+        </div>
+        <div class="editor-body">
+          <span class="tok-kw">const</span> <span class="tok-key">developer</span> <span class="tok-punc">=</span> <span
+            class="tok-punc">{</span><br>
+          &nbsp;&nbsp;<span class="tok-key">name</span><span class="tok-punc">:</span> <span
+            class="tok-str">"Maryam"</span><span class="tok-punc">,</span><br>
+          &nbsp;&nbsp;<span class="tok-key">role</span><span class="tok-punc">:</span> <span class="tok-str">"Web
+            Developer"</span><span class="tok-punc">,</span><br>
+          &nbsp;&nbsp;<span class="tok-key">stack</span><span class="tok-punc">:</span> <span
+            class="tok-punc">[</span><span class="tok-str">"JavaScript"</span><span class="tok-punc">,</span> <span
+            class="tok-str">"React"</span><span class="tok-punc">,</span> <span class="tok-str">"Node"</span><span
+            class="tok-punc">]</span><span class="tok-punc">,</span><br>
+          &nbsp;&nbsp;<span class="tok-key">status</span><span class="tok-punc">:</span> <span class="tok-str">"open to
+            work"</span><span class="cursor"></span><br>
+          <span class="tok-punc">};</span>
+        </div>
+      </div>
+    </div>
 
-      <a class="project" href="#" target="_blank" rel="noopener">
+    <section id="work" class="bordered">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Selected work</h2>
+        </div>
+
+        <a class="project" href="https://cafe-website-eosin-iota.vercel.app/" target="_blank" rel="noopener">
+          <span class="project-index">01</span>
+          <div>
+            <h3 class="project-title">Café</h3>
+            <p class="project-desc">A responsive specialty coffee website featuring interactive animations and a modern
+              interface.</p>
+            <ul class="tags">
+              <li>Next.js</li>
+              <li>Tailwind</li>
+              <li>GSAP</li>
+            </ul>
+          </div>
+          <span class="project-arrow">↗</span>
+        </a>
+
+        <!-- <a class="project" href="#" target="_blank" rel="noopener">
         <span class="project-index">02</span>
         <div>
           <h3 class="project-title">CrochetByKawther</h3>
@@ -428,9 +581,9 @@
           <ul class="tags"><li>Next.js</li><li>Convex</li><li>TypeScript</li></ul>
         </div>
         <span class="project-arrow">↗</span>
-      </a>
+      </a> -->
 
-      <a class="project" href="#" target="_blank" rel="noopener">
+        <!-- <a class="project" href="#" target="_blank" rel="noopener">
         <span class="project-index">03</span>
         <div>
           <h3 class="project-title">Project Three</h3>
@@ -438,72 +591,43 @@
           <ul class="tags"><li>JavaScript</li><li>Express</li><li>MongoDB</li></ul>
         </div>
         <span class="project-arrow">↗</span>
-      </a>
-    </div>
-  </section>
-
-  <section id="contact" class="bordered">
-    <div class="wrap contact-grid">
-      <div class="contact-intro">
-        <h2>Let's work together</h2>
-        <p>Have a project in mind, or just want to say hi? My inbox is open.</p>
-        <a class="direct-email" href="mailto:you@example.com">you@example.com</a>
+      </a> -->
       </div>
-      <form id="contact-form">
-        <div class="field">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" required>
+    </section>
+
+    <section id="contact" class="bordered">
+      <div class="wrap">
+        <div class="contact-intro">
+          <h2>Let's work together</h2>
+
+          <p>
+            Have a project in mind, or just want to say hi?
+            My inbox is open.
+          </p>
+          <p class="contact-email">mariamalbarri@gmail.com</p>
+          <a class="btn btn-primary" href="mailto:mariamalbarri@gmail.com">
+            Email me
+          </a>
+
         </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required>
-        </div>
-        <div class="field">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="4" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Send message</button>
-        <p class="form-status" id="form-status" role="status"></p>
-      </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <span>© <span id="year"></span> Maryam</span>
+    <div class="socials">
+      <a href="https://github.com/maryamalbarri" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/maryamalbarri" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-  </section>
-</main>
+  </footer>
 
-<footer class="wrap">
-  <span>© <span id="year"></span> Maryam</span>
-  <div class="socials">
-    <a href="https://github.com/maryamalbarri" target="_blank" rel="noopener">GitHub</a>
-    <a href="https://www.linkedin.com/in/maryamalbarri" target="_blank" rel="noopener">LinkedIn</a>
-  </div>
-</footer>
-
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Contact form: no backend is wired up yet, so this opens the visitor's
-  // mail client with the message pre-filled. Swap this handler for a call
-  // to Formspree, EmailJS, or your own API route when you're ready to wire
-  // up real submissions.
-  const form = document.getElementById('contact-form');
-  const status = document.getElementById('form-status');
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
-    const message = form.message.value.trim();
-
-    if (!name || !email || !message) {
-      status.textContent = 'Please fill in every field.';
-      return;
-    }
-
-    const subject = encodeURIComponent('Portfolio contact from ' + name);
-    const body = encodeURIComponent(message + '\n\n— ' + name + ' (' + email + ')');
-    window.location.href = 'mailto:you@example.com?subject=' + subject + '&body=' + body;
-    status.textContent = 'Opening your mail client…';
-  });
-</script>
+  <script>
+    // Automatically update copyright year
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
 
 </body>
+
 </html>
